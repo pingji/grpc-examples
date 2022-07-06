@@ -31,7 +31,7 @@ clean:
 	rm -rf $(GREETER_SERVER_DIR)/$(GREETER_SERVER_BIN) $(GREETER_CLIENT_DIR)/$(GREETER_CLIENT_BIN)
 
 start-minikube:
-	minikube start
+	minikube start --image-mirror-country=cn --kubernetes-version=v1.23.8
 
 minikube-env:
 	eval `minikube -p minikube docker-env`

@@ -14,6 +14,7 @@ make start-minikube-dashboard # 启动minikube-dashboard
 eval `minikube -p minikube docker-env` # 设置docker环境
 make build-server-image # 构建grpc server镜像
 make build-client-image # 构建grpc client镜像
+make create-k8s-namespace # 创建 namespace
 make create-server-deployment # 构建grpc server deployment，即创建grpc server pods
 ```
 
@@ -25,6 +26,7 @@ make create-server-deployment # 构建grpc server deployment，即创建grpc ser
 make create-server-service # 创建clusterIP service
 make create-client-deployment # 创建grpc client部署，使用service name直连
 make client-log # 查看日志
+make clean-cluster-ip # 删除 client & service
 ```
 
 **注意：**
@@ -39,6 +41,7 @@ make client-log # 查看日志
 make create-server-headless-service # 创建headless service
 make create-client-headless-deployment # 创建grpc client部署，使用headless service name直连
 make client-headless-log # 查看日志
+make clean-headless # 删除 client & service
 ```
 
 **注意：**
@@ -94,6 +97,8 @@ make create-envoy-deployment # 创建envoy deployment
 make create-envoy-service # 创建k8s service，代理到envoy pod
 make create-client-envoy-deployment # 创建grpc client deployment，连到envoy service
 make client-envoy-log # 查看grpc client日志
+make clean-headless # 删除 client & service
+make clean-envoy # 删除 client & service & configmap
 ```
 
 ## 基于Etcd/consul 等外部服务注册中心模式

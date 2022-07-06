@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: grpc-lb-example # 指定namespace
+  namespace: grpc-lb-example
   name:  grpc-lb-example-greeter-client-headless
   labels:
     name: grpc-lb-example-greeter-client-headless
