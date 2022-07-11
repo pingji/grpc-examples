@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: grpc-lb-example # 指定namespace
+  # namespace: grpc-lb-example
   name:  grpc-lb-example-greeter-client-envoy-sidecar
   labels:
     name: grpc-lb-example-greeter-client-envoy-sidecar
@@ -16,19 +16,18 @@ spec:
         name: greeter-client-envoy-sidecar
     spec:
       containers:
-      - name: greeter-client-envoy-sidecar
-        image: greeter_client:1.0
-        command: ["greeter_client"]
+      - name: greeter-client
+        image: harbor.internal.moqi.ai/pingji/java_greeter_client:1.0
         env:
-        - name: SERVER_DOMAIN
-          value: localhost
-        - name: SERVER_PORT
-          value: "8443" # 这里是envoy-proxy sidecard的地址
-      - name: envoy-proxy # envoy-proxy作为边车
-        image: envoyproxy/envoy:v1.21.0
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      - name: envoy-proxy 
+        image: harbor.internal.moqi.ai/pingji/envoy:v1.22.2
         ports:
-        - name: https
-          containerPort: 8443
+        - name: http
+          containerPort: 50051
         volumeMounts:
         - name: config
           mountPath: /etc/envoy

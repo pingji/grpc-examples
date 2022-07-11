@@ -30,6 +30,9 @@ build-client-image:
 clean:
 	rm -rf $(GREETER_SERVER_DIR)/$(GREETER_SERVER_BIN) $(GREETER_CLIENT_DIR)/$(GREETER_CLIENT_BIN)
 
+build-java-server:
+	maven 
+
 start-minikube:
 	minikube start --image-mirror-country=cn --kubernetes-version=v1.23.8
 
