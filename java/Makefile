@@ -15,7 +15,7 @@ run-server:
 run-client:
 	cd helloworld && \
 	$(MVN) -DskipTests package exec:java -Dexec.mainClass=org.example.grpc.client.HelloWorldClient
-	
+
 clean-build:
 	cd helloworld && \
 	$(MVN) clean
@@ -52,6 +52,7 @@ clean-k8s:
 	kubectl delete -f deploy/envoy-sidecar-configmap.yml
 	kubectl delete -f deploy/deployment-client.yml
 
-
-
 clean: clean-build
+
+client-log:
+	kubectl get pods | grep greeter-client | awk  '{print $$1}' | xargs -I{} kubectl logs -f {} 
