@@ -41,16 +41,16 @@ push-image:
 	docker push harbor.internal.moqi.ai/pingji/$(GREETER_CLIENT_IMAGE)
 
 deploy-k8s:
-	kubectl apply -f deploy/service.yml
-	kubectl apply -f deploy/deployment-server.yml
-	kubectl apply -f deploy/envoy-sidecar-configmap.yml
-	kubectl apply -f deploy/deployment-client.yml
+	kubectl apply -f k8s/service.yml
+	kubectl apply -f k8s/deployment-server.yml
+	kubectl apply -f k8s/envoy-sidecar-configmap.yml
+	kubectl apply -f k8s/deployment-client.yml
 
 clean-k8s:
-	kubectl delete -f deploy/service.yml
-	kubectl delete -f deploy/deployment-server.yml
-	kubectl delete -f deploy/envoy-sidecar-configmap.yml
-	kubectl delete -f deploy/deployment-client.yml
+	kubectl delete -f k8s/service.yml
+	kubectl delete -f k8s/deployment-server.yml
+	kubectl delete -f k8s/envoy-sidecar-configmap.yml
+	kubectl delete -f k8s/deployment-client.yml
 
 clean: clean-build
 
